@@ -5,7 +5,6 @@
 
 #define MAXLEN 2048
 
-int lastday = 0;
 FILE *fp = NULL;
 
 void changefile(struct tm *ctm)
@@ -19,14 +18,23 @@ void changefile(struct tm *ctm)
 void Log(char *s)
 {
 	time_t t;
-	struct tm *ctm;
+	static time_t last_t=0;
+	static int tm_hour, tm_min, tm_sec;
 	time(&t);
-	ctm = localtime(&t);
-	if( ctm->tm_mday != lastday)  {
-		changefile(ctm);
-		lastday = ctm->tm_mday;
+	if ( t != last_t ) {
+		static int lastday = 0;
+		struct tm *ctm;
+		last_t = t;
+		ctm = localtime(&t);
+		tm_hour = ctm->tm_hour;
+		tm_min = ctm->tm_min;
+		tm_sec = ctm->tm_sec;
+		if( ctm->tm_mday != lastday)  {
+			changefile(ctm);
+			lastday = ctm->tm_mday;
+		}
 	}
-	fprintf(fp,"%02d:%02d:%02d %s\n",ctm->tm_hour, ctm->tm_min, ctm->tm_sec,s);
+	fprintf(fp,"%02d:%02d:%02d %s\n", tm_hour, tm_min, tm_sec, s);
 }
 int main(void)
 {	
