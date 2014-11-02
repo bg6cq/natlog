@@ -1,14 +1,7 @@
 #!/bin/sh
-#
-# This script will be executed *after* all the other init scripts.
-# You can put your own initialization stuff in here if you don't
-# want to do the full Sys V style init stuff.
 
-touch /var/lock/subsys/local
 
-ip add add 218.22.21.16/27 dev eth0
-ip add add 218.22.21.3/27 dev eth0
-
+#centos 6
 
 
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -31,6 +24,10 @@ echo 10 > nf_conntrack_tcp_timeout_syn_recv
 echo 10 > nf_conntrack_tcp_timeout_syn_sent
 echo 10 > nf_conntrack_tcp_timeout_time_wait
 
+
+
+ip add add 218.22.21.16/27 dev eth0
+ip add add 218.22.21.3/27 dev eth0
 
 ip route add 202.38.64.0/19 via 202.38.96.194
 ip route add 210.45.64.0/20 via 202.38.96.194

@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#
-# cat multirun.rc
-
 iptables -F
 iptables -t nat -F
 
