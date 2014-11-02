@@ -1,0 +1,5 @@
+while true; 
+do conntrack -E -e DESTR -j -b 20480000 | /usr/src/natlog/natlog
+sleep 1
+done
+

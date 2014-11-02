@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+
+ip add add 218.22.21.16/27 dev eth0
+ip add add 218.22.21.3/27 dev eth0
+
+
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+modprobe nf_conntrack hashsize=200000
+modprobe nf_conntrack_ftp
+modprobe iptable_nat
+modprobe ip_nat_ftp
+
+cd /proc/sys/net/netfilter
+
+echo 1 > nf_conntrack_acct 
+echo 60 > nf_conntrack_generic_timeout
+echo 10 > nf_conntrack_icmp_timeout
+echo 10 > nf_conntrack_tcp_timeout_close_wait
+echo 900 > nf_conntrack_tcp_timeout_established
+echo 10 > nf_conntrack_tcp_timeout_fin_wait
+echo 10 > nf_conntrack_tcp_timeout_last_ack
+echo 10 > nf_conntrack_tcp_timeout_syn_recv
+echo 10 > nf_conntrack_tcp_timeout_syn_sent
+echo 10 > nf_conntrack_tcp_timeout_time_wait
+
+
+#IPµØ·ÉÖ
+#162¡¡ftp
+#163  www1n
+#164-165 ±£Á¸øÊ
+#166,167 nat
+#168 ·´Ï´úicproxy
+#169 openVPN
+#170, µç
+#171, JAC JS22
+#172 vtunvpn
+#173 ·´Ï´úevproxy
+#174 bbs
+#ip addr add 218.104.71.166/28 dev eth0
+#ip addr add 202.38.96.201/26 dev eth2
+#ip link set eth0 up
+#ip link set eth2 up
+
+#IP·ÓÉÖ
+#ip route add 0/0 via 218.104.71.161
+
+ip route add 202.38.64.0/19 via 202.38.96.194
+ip route add 210.45.64.0/20 via 202.38.96.194
+ip route add 210.45.112.0/20 via 202.38.96.194
+ip route add 211.86.144.0/20 via 202.38.96.194
+ip route add 222.195.64.0/19 via 202.38.96.194
+ip route add 114.214.160.0/19 via 202.38.96.194
+ip route add 114.214.192.0/19 via 202.38.96.194
+
+
+/etc/rc.d/rc.firewall
+
+
+/usr/src/traffic/iftrafficd &
