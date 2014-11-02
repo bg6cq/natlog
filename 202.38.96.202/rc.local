@@ -32,26 +32,6 @@ echo 10 > nf_conntrack_tcp_timeout_syn_sent
 echo 10 > nf_conntrack_tcp_timeout_time_wait
 
 
-#IPµØ·ÉÖ
-#162¡¡ftp
-#163  www1n
-#164-165 ±£Á¸øÊ
-#166,167 nat
-#168 ·´Ï´úicproxy
-#169 openVPN
-#170, µç
-#171, JAC JS22
-#172 vtunvpn
-#173 ·´Ï´úevproxy
-#174 bbs
-#ip addr add 218.104.71.166/28 dev eth0
-#ip addr add 202.38.96.201/26 dev eth2
-#ip link set eth0 up
-#ip link set eth2 up
-
-#IP·ÓÉÖ
-#ip route add 0/0 via 218.104.71.161
-
 ip route add 202.38.64.0/19 via 202.38.96.194
 ip route add 210.45.64.0/20 via 202.38.96.194
 ip route add 210.45.112.0/20 via 202.38.96.194
@@ -62,6 +42,5 @@ ip route add 114.214.192.0/19 via 202.38.96.194
 
 
 /etc/rc.d/rc.firewall
-
 
 /usr/src/traffic/iftrafficd &

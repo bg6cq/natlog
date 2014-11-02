@@ -5,8 +5,8 @@
 
 #define MAXLEN 2048
 
-int lastday=0;
-FILE *fp=NULL;
+int lastday = 0;
+FILE *fp = NULL;
 
 void changefile(struct tm *ctm)
 {
@@ -14,7 +14,7 @@ void changefile(struct tm *ctm)
 	if(fp) pclose(fp);
 	snprintf(fnbuf,MAXLEN,"gzip > /home/natlog/%04d.%02d.%02d.%02d%02d%02d.gz",
 		ctm->tm_year+1900, ctm->tm_mon+1, ctm->tm_mday,ctm->tm_hour, ctm->tm_min, ctm->tm_sec);
-	fp=popen(fnbuf,"w");
+	fp = popen(fnbuf,"w");
 }
 void Log(char *s)
 {
