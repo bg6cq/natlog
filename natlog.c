@@ -47,7 +47,8 @@ int main(void)
 			len--; 
 			buf[len]=0;
 		}
-		if(  (buf[len-2]=='=') 	&& (buf[len-1]=='0') ) continue;
+// if you don't want log only one direction traffic, please uncomment the following line
+//		if(  (buf[len-2]=='=') 	&& (buf[len-1]=='0') ) continue;
 		Log( buf+ 9);
 	}	
 	return 0;
